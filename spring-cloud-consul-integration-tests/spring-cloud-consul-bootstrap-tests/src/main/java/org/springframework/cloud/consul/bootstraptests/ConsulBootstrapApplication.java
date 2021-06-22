@@ -77,37 +77,37 @@ public class ConsulBootstrapApplication {
 		SpringApplication.run(ConsulBootstrapApplication.class, args);
 	}
 
-	@RequestMapping("/me")
+	@GetMapping("/me")
 	public ServiceInstance me() {
 		return this.registration;
 	}
 
-	@RequestMapping("/")
+	@GetMapping("/")
 	public ServiceInstance lb() {
 		return this.loadBalancer.choose(this.appName);
 	}
 
-	@RequestMapping("/rest")
+	@GetMapping("/rest")
 	public String rest() {
 		return this.restTemplate.getForObject("http://" + this.appName + "/me", String.class);
 	}
 
-	@RequestMapping("/choose")
+	@GetMapping("/choose")
 	public String choose() {
 		return this.loadBalancer.choose(this.appName).getUri().toString();
 	}
 
-	@RequestMapping("/myenv")
+	@GetMapping("/myenv")
 	public String env(@RequestParam("prop") String prop) {
 		return this.env.getProperty(prop, "Not Found");
 	}
 
-	@RequestMapping("/prop")
+	@GetMapping("/prop")
 	public String prop() {
 		return sampleProperties().getProp();
 	}
 
-	@RequestMapping("/instances")
+	@GetMapping("/instances")
 	public List<ServiceInstance> instances() {
 		return this.discoveryClient.getInstances(this.appName);
 	}
@@ -117,7 +117,7 @@ public class ConsulBootstrapApplication {
 	 * SubtypeModule(SimpleRemoteEvent.class); }
 	 */
 
-	@RequestMapping("/feign")
+	@GetMapping("/feign")
 	public String feign() {
 		return this.sampleClient.choose();
 	}
@@ -141,7 +141,7 @@ public class ConsulBootstrapApplication {
 	@FeignClient("testConsulApp")
 	public interface SampleClient {
 
-		@RequestMapping(value = "/choose", method = RequestMethod.GET)
+		@GetMapping("/choose")
 		String choose();
 
 	}

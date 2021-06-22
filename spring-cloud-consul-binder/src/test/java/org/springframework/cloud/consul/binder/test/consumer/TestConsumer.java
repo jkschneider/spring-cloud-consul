@@ -92,12 +92,12 @@ public class TestConsumer implements ApplicationRunner {
 		this.isBound = true;
 	}
 
-	@RequestMapping("/is-bound")
+	@GetMapping("/is-bound")
 	public boolean isBound() {
 		return this.isBound;
 	}
 
-	@RequestMapping("/message-payload")
+	@GetMapping("/message-payload")
 	public String getMessagePayload() {
 		return this.messagePayload;
 	}

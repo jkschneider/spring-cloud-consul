@@ -86,7 +86,7 @@ public class TestProducer implements ApplicationRunner {
 		return new StubPartitionSelectorStrategy();
 	}
 
-	@RequestMapping("/partition-strategy-invoked")
+	@GetMapping("/partition-strategy-invoked")
 	public boolean partitionStrategyInvoked() {
 		return stubPartitionSelectorStrategy().invoked;
 	}
